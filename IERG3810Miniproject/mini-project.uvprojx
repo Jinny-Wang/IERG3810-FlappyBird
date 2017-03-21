@@ -585,6 +585,11 @@
               <FileType>5</FileType>
               <FilePath>.\Board\IERG3810_LCD.h</FilePath>
             </File>
+            <File>
+              <FileName>bird.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Board\bird.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

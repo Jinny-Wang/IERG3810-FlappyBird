@@ -255,3 +255,4 @@ void IERG3810_TFTLCD_DrawDigit(u16 color, u16 start_x, u16 start_y, u8 digit){
 				break;
 		}
 }
+
