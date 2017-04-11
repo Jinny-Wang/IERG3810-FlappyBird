@@ -1,7 +1,7 @@
 .\objects\ierg3810_usart.o: Board\IERG3810_USART.c
 .\objects\ierg3810_usart.o: .\Core\stm32f10x.h
 .\objects\ierg3810_usart.o: .\Core\core_cm3.h
-.\objects\ierg3810_usart.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdint.h
+.\objects\ierg3810_usart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\ierg3810_usart.o: .\Core\system_stm32f10x.h
 .\objects\ierg3810_usart.o: .\User\stm32f10x_conf.h
 .\objects\ierg3810_usart.o: .\Fw_lib\inc\stm32f10x_adc.h

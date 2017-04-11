@@ -563,10 +563,13 @@ ARM Macro Assembler    Page 9
               00000400 
               00000200 
               00000000 
-Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=.\object
-s\startup_stm32f10x_hd.d -o.\objects\startup_stm32f10x_hd.o -IC:\Keil_v5\ARM\RV
-31\INC -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.1.0\CMSIS\Include -IDevice\Include --l
-ist=.\listings\startup_stm32f10x_hd.lst Core\startup_stm32f10x_hd.s
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\objects\startup_stm32f10x_hd.d -o.\objects\startup_stm32f10x_hd.
+o -I"U:\ierg3810\IERG3810-FlappyBird-master\IERG3810-FlappyBird-master\IERG3810
+ Mini project - Flappy Bird\IERG3810Miniproject\RTE" -IC:\Keil_v5\ARM\PACK\Keil
+\STM32F1xx_DFP\2.1.0\Device\Include -IC:\Keil_v5\ARM\CMSIS\Include --predefine=
+"__UVISION_VERSION SETA 515" --predefine="STM32F10X_HD SETA 1" --list=.\listing
+s\startup_stm32f10x_hd.lst Core\startup_stm32f10x_hd.s
 
 
 
@@ -1463,4 +1466,4 @@ Symbol: __use_two_region_memory
       None
 Comment: __use_two_region_memory unused
 3 symbols
-423 symbols in table
+425 symbols in table

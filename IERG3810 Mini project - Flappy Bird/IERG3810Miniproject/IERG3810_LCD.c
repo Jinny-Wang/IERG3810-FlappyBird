@@ -134,6 +134,7 @@ void IERG3810_TFTLCD_ShowChar(u16 x,u16 y,u8 ascii, u16 color, u16 bgcolor){
 	u8 i,j;
 	u8 index;
 	u8 height = 16, length = 8;
+	
 	if(ascii < 32 || ascii > 127) return;
 	ascii -= 32;
 	IERG3810_TFTLCD_WrReg(0x2A);
@@ -159,6 +160,40 @@ void IERG3810_TFTLCD_ShowChar(u16 x,u16 y,u8 ascii, u16 color, u16 bgcolor){
 					IERG3810_TFTLCD_WrData(color);
 			  else
 					IERG3810_TFTLCD_WrData(bgcolor);
+				
+			}
+		}
+	}
+	
+}
+
+void IERG3810_TFTLCD_ShowChar_NoBG(u16 x,u16 y,u8 ascii, u16 color){
+	u8 i,j;
+	u8 index;
+	u8 height = 16, length = 8;
+	if(ascii < 32 || ascii > 127) return;
+	ascii -= 32;
+	IERG3810_TFTLCD_WrReg(0x2A);
+	IERG3810_TFTLCD_WrData(x>>8);
+	IERG3810_TFTLCD_WrData(x & 0xFF);
+	IERG3810_TFTLCD_WrData((length + x - 1)>>8);
+	IERG3810_TFTLCD_WrData((length + x - 1) & 0xFF);
+	
+	IERG3810_TFTLCD_WrReg(0x2B);
+	IERG3810_TFTLCD_WrData(y>>8);
+	IERG3810_TFTLCD_WrData(y & 0xFF);
+	IERG3810_TFTLCD_WrData((height + y - 1)>>8);
+	IERG3810_TFTLCD_WrData((height + y - 1) & 0xFF);
+	
+	IERG3810_TFTLCD_WrReg(0x2C);//LCD_WriteRAM_Prepare();
+	
+	for(j=0; j<height/8; j++){
+		
+		for(i=0; i<height/2; i++){
+			
+			for(index=0; index<length;index++){
+				if((asc2_1608[ascii][index*2+1-j]>>i) & 0x01)
+					IERG3810_TFTLCD_WrData(color);
 				
 			}
 		}
@@ -195,6 +230,40 @@ void IERG3810_TFTLCD_ShowChinChar(u16 x,u16 y,u8 code, u16 color, u16 bgcolor){
 					IERG3810_TFTLCD_WrData(color);
 			  else
 					IERG3810_TFTLCD_WrData(bgcolor);
+				
+			}
+		}
+	}
+	
+}
+
+void IERG3810_TFTLCD_ShowChinChar_NoBG(u16 x,u16 y,u8 code, u16 color){
+	u8 i,j;
+	u8 index;
+	u8 height = 16, length = 16;
+	if(code >= 0x0A) return;
+	
+	IERG3810_TFTLCD_WrReg(0x2A);
+	IERG3810_TFTLCD_WrData(x>>8);
+	IERG3810_TFTLCD_WrData(x & 0xFF);
+	IERG3810_TFTLCD_WrData((length + x - 1)>>8);
+	IERG3810_TFTLCD_WrData((length + x - 1) & 0xFF);
+	
+	IERG3810_TFTLCD_WrReg(0x2B);
+	IERG3810_TFTLCD_WrData(y>>8);
+	IERG3810_TFTLCD_WrData(y & 0xFF);
+	IERG3810_TFTLCD_WrData((height + y - 1)>>8);
+	IERG3810_TFTLCD_WrData((height + y - 1) & 0xFF);
+	
+	IERG3810_TFTLCD_WrReg(0x2C);//LCD_WriteRAM_Prepare();
+	
+	for(j=0; j<height/8; j++){
+		
+		for(i=0; i<height/2; i++){
+			
+			for(index=0; index<length;index++){
+				if((chi_1616[code][index*2+1-j]>>i) & 0x01)
+					IERG3810_TFTLCD_WrData(color);
 				
 			}
 		}
@@ -254,6 +323,28 @@ void IERG3810_TFTLCD_DrawDigit(u16 color, u16 start_x, u16 start_y, u8 digit){
 			case(0x09):
 				IERG3810_TFTLCD_SevenSegment(color,start_x, start_y,0x6F);
 				break;
+		}
+}
+
+void IERG3810_TFTLCD_ShowCharInLine(u16 x,u16 y,char* str,u16 str_size, u16 color, u16 bgcolor){
+		u16 i;
+	  for(i=0x0; i < str_size; i++){
+			u8 ascii = (u8)str[i];
+			IERG3810_TFTLCD_ShowChar(x+ i * 0x0008,y,ascii,color,bgcolor);
+		}
+}
+
+void IERG3810_TFTLCD_ShowCharInLine_NoBG(u16 x,u16 y,u8* str,u16 str_size, u16 color){
+		u16 i;
+	  for(i=0x0; i < str_size; i++){
+			IERG3810_TFTLCD_ShowChar_NoBG(x+ i * 0x0008,y,str[i],color);
+		}
+}
+
+void IERG3810_TFTLCD_ShowChinCharInLine_NoBG(u16 x,u16 y,u8* str,u16 str_size, u16 color){
+		u16 i;
+	  for(i=0x0; i < str_size; i++){
+			IERG3810_TFTLCD_ShowChinChar_NoBG(x+ i * 0x0008,y,str[i],color);
 		}
 }
 
